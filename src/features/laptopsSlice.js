@@ -27,6 +27,7 @@ const initialState = {
   cpus: [],
   positions: [],
 };
+
 const laptopSlice = createSlice({
   name: "laptop",
   initialState,

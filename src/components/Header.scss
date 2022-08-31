@@ -1,0 +1,26 @@
+.header {
+  background-color: rgba(246, 246, 246, 1);
+  .back {
+    position: absolute;
+    border: none;
+    background-color: rgba(217, 217, 217, 1);
+    border-radius: 50%;
+    height: 53px;
+    width: 53px;
+    left: 70px;
+    top: 53px;
+    img {
+      height: 16px;
+    }
+  }
+  .headers {
+    margin-top: 91px;
+    display: flex;
+    justify-content: center;
+    gap: 66px;
+    .active {
+      border-bottom: 2px solid black;
+      padding-bottom: 15px;
+    }
+  }
+}

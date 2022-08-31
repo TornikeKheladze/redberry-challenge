@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
 import { useDispatch } from "react-redux";
 import {
   fetchBrands,
@@ -16,10 +15,10 @@ import LaptopInfo from "./pages/laptopInfo/LaptopInfo";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchTeams());
-    dispatch(fetchBrands());
-    dispatch(fetchCpus());
-    dispatch(fetchPositions());
+    // dispatch(fetchTeams());
+    // dispatch(fetchBrands());
+    // dispatch(fetchCpus());
+    // dispatch(fetchPositions());
   }, []);
 
   return (

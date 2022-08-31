@@ -1,0 +1,84 @@
+.employeeFormPage {
+  margin: auto;
+  width: 1226px;
+  height: 973px;
+  background-color: white;
+  border-radius: 18px;
+  .employeeForm {
+    margin-top: 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 53px;
+
+    .fields {
+      div {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        label {
+          font-size: 18px;
+          font-weight: 500;
+        }
+        input {
+          border: 1px solid rgba(100, 153, 255, 1);
+          height: 60px;
+          border-radius: 8px;
+          padding-left: 19px;
+        }
+      }
+      display: flex;
+      justify-content: center;
+      gap: 66px;
+    }
+    .dropdown {
+      align-self: center;
+      select {
+        background-color: rgba(235, 235, 235, 1);
+        height: 60px;
+        width: 866px;
+        border-radius: 8px;
+        padding-left: 19px;
+        option {
+          height: 60px;
+          border-radius: 8px;
+        }
+      }
+    }
+    .email,
+    .telNum {
+      align-self: center;
+      div {
+        display: flex;
+        flex-direction: column;
+        width: 866px;
+        input {
+          border: 1px solid rgba(100, 153, 255, 1);
+          height: 60px;
+          border-radius: 8px;
+          padding-left: 19px;
+        }
+      }
+    }
+    .submitButton {
+      align-self: flex-end;
+      width: 176px;
+      background-color: rgba(98, 161, 235, 1);
+      border-radius: 8px;
+      border: none;
+      height: 60px;
+      color: white;
+      font-size: 20px;
+      font-weight: 500;
+      margin-right: 174px;
+      margin-bottom: 44px;
+    }
+  }
+}
+.logo {
+  img {
+    width: 85px;
+  }
+  margin-top: 67px;
+  margin-bottom: 45px;
+  text-align: center;
+}

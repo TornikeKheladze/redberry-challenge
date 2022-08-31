@@ -14,6 +14,8 @@ import { useNavigate } from "react-router-dom";
 import { submit } from "../../../features/formSlice";
 
 const EmployeeForm = () => {
+  const teams = useSelector((store) => store.generals.teams);
+  const positions = useSelector((store) => store.generals.positions);
   const [filteredPositions, setFilteredPositions] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,9 +24,16 @@ const EmployeeForm = () => {
     dispatch(fetchPositions());
   }, []);
 
-  const teams = useSelector((store) => store.generals.teams);
-  const positions = useSelector((store) => store.generals.positions);
-  const initialValues = {
+  useEffect(() => {
+    if (data)
+      setFilteredPositions(
+        positions.filter(
+          (position) => Number(data.team_id) === position.team_id
+        )
+      );
+  }, [positions]);
+
+  let initialValues = {
     name: "",
     surname: "",
     team_id: "",
@@ -35,8 +44,11 @@ const EmployeeForm = () => {
 
   const onSubmit = (values) => {
     dispatch(submit(values));
+    localStorage.clear("form/employee");
     navigate("/info/laptop");
   };
+  const data = JSON.parse(localStorage.getItem("form/employee"));
+  if (data) initialValues = data;
 
   const validate = ({
     name,
@@ -47,6 +59,8 @@ const EmployeeForm = () => {
     email,
   }) => {
     let error = {};
+    let formData = { name, surname, team_id, position_id, phone_number, email };
+    localStorage.setItem("form/employee", JSON.stringify(formData));
 
     if (!name) {
       error.name = "სავალდებულო";
@@ -59,6 +73,7 @@ const EmployeeForm = () => {
     } else if (surname.length < 2) {
       error.surname = "მინიმუმ 2 სიმბოლო";
     }
+
     if (!team_id) {
       error.team_id = "სავალდებულო";
     } else {
@@ -66,14 +81,17 @@ const EmployeeForm = () => {
         positions.filter((position) => Number(team_id) === position.team_id)
       );
     }
+
     if (!position_id) {
       error.position_id = "სავალდებულო";
     }
+
     if (!email) {
       error.email = "სავალდებულო";
     } else if (email.slice(-12) !== "@redberry.ge") {
       error.email = "მეილი უნდა მთავრდებოდეს @redberry.ge";
     }
+
     if (!phone_number) {
       error.phone_number = "სავალდებულო";
     } else if (
@@ -92,7 +110,6 @@ const EmployeeForm = () => {
         <Header active="employee" to="/" />
         <Formik
           initialValues={initialValues}
-          // validationSchema={validationSchema}
           validate={validate}
           onSubmit={onSubmit}
         >

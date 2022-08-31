@@ -13,14 +13,40 @@
       height: 16px;
     }
   }
+  .only-mobile {
+    display: none;
+  }
+
   .headers {
     margin-top: 91px;
     display: flex;
     justify-content: center;
     gap: 66px;
+
     .active {
       border-bottom: 2px solid black;
       padding-bottom: 15px;
+    }
+    @media (max-width: 390px) {
+      text-align: center;
+      .active {
+        border: none;
+        font-weight: 700;
+        font-size: 40px;
+      }
+    }
+  }
+
+  @media (max-width: 390px) {
+    .back {
+      background-color: rgba(246, 246, 246, 1);
+    }
+    .none {
+      display: none;
+    }
+    .only-mobile {
+      display: block;
+      text-align: center;
     }
   }
 }

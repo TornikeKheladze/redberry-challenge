@@ -126,10 +126,11 @@ const EmployeeForm = () => {
           </Form>
         </Formik>
       </div>
-      <div className="logo">
+      <div className="employee-logo">
         <img src={logo} alt="logo" />
       </div>
     </>
   );
 };
+
 export default EmployeeForm;

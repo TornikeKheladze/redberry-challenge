@@ -9,7 +9,6 @@
     display: flex;
     flex-direction: column;
     gap: 53px;
-
     .fields {
       div {
         display: flex;
@@ -74,11 +73,74 @@
     }
   }
 }
-.logo {
+.employee-logo {
   img {
     width: 85px;
   }
   margin-top: 67px;
   margin-bottom: 45px;
   text-align: center;
+}
+
+@media (max-width: 390px) {
+  .employeeFormPage {
+    .header {
+      .back {
+        left: 16px;
+        top: 34px;
+      }
+      position: absolute;
+      width: 390px;
+      height: 84px;
+      .headers {
+        margin-top: 31px;
+        margin-bottom: -5px;
+        h3 {
+          font-size: 16px;
+        }
+      }
+    }
+    margin: auto;
+    width: 390px;
+    border-radius: 18px;
+    .employeeForm {
+      gap: 46px;
+      margin-left: 15px;
+      position: absolute;
+      .fields {
+        display: flex;
+        gap: 23px;
+        flex-direction: column;
+        margin-top: 38px;
+        div {
+          margin: 0;
+          width: 358px;
+        }
+      }
+      .dropdown {
+        select {
+          width: 358px;
+        }
+      }
+      .telNum {
+        div {
+          width: 358px;
+        }
+      }
+      .email {
+        div {
+          width: 358px;
+        }
+      }
+      .submitButton {
+        margin: 0;
+        margin-top: 43px;
+        margin-right: 16px;
+        margin-bottom: 58px;
+      }
+    }
+  }
+  .employee-logo {
+    display: none;
+  }
 }

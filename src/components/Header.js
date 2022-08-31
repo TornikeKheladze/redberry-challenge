@@ -6,18 +6,19 @@ const Header = ({ active, to }) => {
   return (
     <header className="header">
       <Link to={to}>
-        <button className="btn back">
+        <button className="btn back mobile-none">
           <img src={leftButton} />
         </button>
       </Link>
       <div className="headers">
-        <h3 className={active === "employee" ? "active" : ""}>
+        <h3 className={active === "employee" ? "active" : "none"}>
           თანამშრომლის ინფო
         </h3>
-        <h3 className={active === "laptop" ? "active" : ""}>
+        <h3 className={active === "laptop" ? "active" : "none"}>
           ლეპტოპის მახასიათებლები
         </h3>
       </div>
+      <p className="only-mobile">{active === "employee" ? "1/2" : "2/2"}</p>
     </header>
   );
 };

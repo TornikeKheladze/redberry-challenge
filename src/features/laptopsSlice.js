@@ -20,6 +20,12 @@ export const fetchPositions = createAsyncThunk(
     return response.data;
   }
 );
+export const createLaptop = createAsyncThunk(
+  "laptop/createLaptop",
+  async (formValues) => {
+    laptops.post("/laptop/create", { formValues });
+  }
+);
 
 const initialState = {
   teams: [],

@@ -5,8 +5,8 @@ const formSlice = createSlice({
   initialState: {},
   reducers: {
     submit: (store, { payload }) => {
-      console.log(payload);
       const updatedData = { ...store.formData, ...payload };
+      console.log(updatedData);
       store.formData = updatedData;
     },
   },

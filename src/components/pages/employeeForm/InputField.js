@@ -1,8 +1,8 @@
 import { ErrorMessage, Field } from "formik";
 
-const InputField = ({ label, type, name, placeholder }) => {
+const InputField = ({ label, type, name, placeholder, className }) => {
   return (
-    <div>
+    <div className={className}>
       <label htmlFor={name}>{label}</label>
       <Field type={type} id={name} name={name} placeholder={placeholder} />
       <ErrorMessage name={name}>

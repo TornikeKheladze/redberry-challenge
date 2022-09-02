@@ -7,11 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPositions, fetchTeams } from "../../../features/laptopsSlice";
 import Email from "./Email";
 import Tel from "./Tel";
-import TeamDropdown from "./TeamDropdown";
-import PositionsDropdown from "./PositionsDropdown";
 import InputField from "./InputField";
 import { useNavigate } from "react-router-dom";
 import { submit } from "../../../features/formSlice";
+import Dropdown from "../laptopForm/Dropdown";
 
 const EmployeeForm = () => {
   const teams = useSelector((store) => store.generals.teams);
@@ -129,10 +128,22 @@ const EmployeeForm = () => {
               />
             </div>
 
-            {teams && <TeamDropdown teams={teams} />}
+            {teams && (
+              <Dropdown
+                data={teams}
+                className="team dropdown"
+                label="თიმი"
+                fieldName="team_id"
+              />
+            )}
 
             {positions && (
-              <PositionsDropdown filteredPositions={filteredPositions} />
+              <Dropdown
+                data={filteredPositions}
+                className="position dropdown"
+                label="პოზიცია"
+                fieldName="position_id"
+              />
             )}
             <Email />
             <Tel />

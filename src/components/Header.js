@@ -10,6 +10,7 @@ const Header = ({ active, to }) => {
           <img src={leftButton} />
         </button>
       </Link>
+
       <div className="headers">
         <h3 className={active === "employee" ? "active" : "none"}>
           თანამშრომლის ინფო

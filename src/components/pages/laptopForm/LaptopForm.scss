@@ -1,0 +1,311 @@
+.laptopFormPage {
+  margin: auto;
+  width: 1226px;
+  border-radius: 18px;
+  background-color: white;
+
+  .imageInput {
+    border: 2px dashed rgba(67, 134, 169, 1);
+    height: 423px;
+    width: 878px;
+    margin: auto;
+    margin-top: 68px;
+    border-radius: 18px;
+    .mobileView {
+      display: none;
+    }
+    p {
+      margin: auto;
+      text-align: center;
+      color: rgba(67, 134, 169, 1);
+      width: 195px;
+      margin-top: 107px;
+      font-size: 20px;
+    }
+    button {
+      color: white;
+      background-color: rgba(98, 161, 235, 1);
+      border: none;
+      height: 60px;
+      width: 233px;
+      border-radius: 8px;
+      display: block;
+      margin: auto;
+      margin-top: 65px;
+      font-size: 20px;
+    }
+  }
+  .fields {
+    border-bottom: 1px solid rgba(199, 199, 199, 1);
+    padding-bottom: 80px;
+    margin: auto;
+    margin-top: 80px;
+    width: 878px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    div {
+      width: 408px;
+      display: flex;
+      flex-direction: column;
+      label {
+        font-size: 19px;
+        font-weight: 700;
+        height: 35px;
+      }
+
+      input,
+      select {
+        padding-left: 16px;
+        height: 60px;
+        border-radius: 8px;
+        font-size: 18px;
+        letter-spacing: 0.04em;
+        font-weight: 700;
+      }
+      select {
+        border: none;
+        background-color: rgba(235, 235, 235, 1);
+      }
+      input {
+        border: 1px solid rgba(100, 153, 255, 1);
+        margin-bottom: 35px;
+      }
+    }
+  }
+  .cpus {
+    padding-top: 79px;
+    margin: auto;
+    display: flex;
+    width: 878px;
+    justify-content: space-between;
+    align-items: center;
+    div {
+      display: flex;
+      flex-direction: column;
+      width: 277px;
+      label {
+        font-size: 19px;
+        font-weight: 700;
+        height: 35px;
+      }
+      input,
+      select {
+        padding-left: 16px;
+        height: 60px;
+        border-radius: 8px;
+        font-size: 18px;
+        letter-spacing: 0.04em;
+        font-weight: 700;
+      }
+      select {
+        border: none;
+        background-color: rgba(235, 235, 235, 1);
+      }
+      input {
+        border: 1px solid rgba(100, 153, 255, 1);
+        margin-bottom: 35px;
+      }
+    }
+  }
+  .rams {
+    display: flex;
+    width: 878px;
+    margin: auto;
+    gap: 100px;
+    margin-top: 60px;
+    border-bottom: 1px solid rgba(199, 199, 199, 1);
+    padding-bottom: 52px;
+    .ram {
+      display: flex;
+      flex-direction: column;
+      width: 408px;
+      label {
+        font-size: 19px;
+        font-weight: 700;
+        height: 35px;
+      }
+      input {
+        padding-left: 16px;
+        height: 60px;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: 700;
+        border: 1px solid rgba(100, 153, 255, 1);
+      }
+    }
+    .memory {
+      display: flex;
+      flex-direction: column;
+      font-size: 19px;
+      font-weight: 700;
+      div {
+        margin-top: 15px;
+        display: flex;
+        gap: 66px;
+        div {
+          display: flex;
+          gap: 10px;
+        }
+      }
+    }
+  }
+  .price {
+    border-bottom: none;
+  }
+  .laptopState {
+    margin-left: 174px;
+    display: flex;
+    flex-direction: column;
+    font-size: 19px;
+    font-weight: 700;
+    div {
+      margin-top: 15px;
+      display: flex;
+      gap: 66px;
+      div {
+        display: flex;
+        gap: 10px;
+      }
+    }
+  }
+  .buttons {
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    width: 878px;
+    margin-top: 80px;
+    padding-bottom: 45px;
+    .goBack {
+      font-size: 18px;
+      border: none;
+      background-color: white;
+      color: rgba(98, 161, 235, 1);
+      font-weight: 600;
+    }
+    .submitBtn {
+      height: 60px;
+      width: 219px;
+      border: none;
+      border-radius: 8px;
+      font-size: 20px;
+      font-weight: 500;
+      color: white;
+      background-color: rgba(98, 161, 235, 1);
+    }
+  }
+}
+
+//mobile view
+@media (max-width: 500px) {
+  .laptopFormPage {
+    .header {
+      .back {
+        left: 16px;
+        top: 34px;
+      }
+      top: 0;
+      width: 390px;
+      .headers {
+        margin-top: 31px;
+        margin-bottom: -5px;
+        h3 {
+          font-size: 16px;
+        }
+      }
+    }
+    .imageInput {
+      height: 244px;
+      width: 358px;
+      background-color: rgba(246, 246, 246, 1);
+      position: absolute;
+      left: 16px;
+      top: 29px;
+      border-radius: 8px;
+      .desktopView {
+        display: none;
+      }
+      .mobileView {
+        display: block;
+        img {
+          padding-top: 63.5px;
+          display: block;
+          margin: auto;
+        }
+      }
+      p {
+        color: rgba(67, 134, 169, 1);
+        height: 52px;
+        margin-top: 30px;
+        width: 176px;
+        text-align: center;
+        margin: auto;
+      }
+    }
+    .fields {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: baseline;
+      justify-content: center;
+      left: 16px;
+      top: 326px;
+      padding-bottom: 33px;
+      div {
+        width: 358px;
+        left: 24px;
+        top: 8px;
+        border-radius: 8px;
+      }
+    }
+    .cpus {
+      padding: 0;
+      position: absolute;
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+      top: 670px;
+      width: 390px;
+      div {
+        display: flex;
+        flex-direction: column;
+        width: 358px;
+      }
+    }
+    .rams {
+      position: absolute;
+      display: flex;
+      gap: 40px;
+      flex-direction: column;
+      width: 390px;
+      align-items: center;
+      top: 1080px;
+      margin: 0;
+      .ram {
+        width: 358px;
+      }
+      .memory {
+        width: 358px;
+      }
+    }
+    .price {
+      position: absolute;
+      top: 1390px;
+    }
+    .laptopState {
+      position: absolute;
+      margin: auto;
+      margin-left: 17px;
+      top: 1660px;
+    }
+    .buttons {
+      position: absolute;
+      top: 1800px;
+      width: 358px;
+      margin-left: 17px;
+      .goBack {
+        background-color: rgba(246, 246, 246, 1);
+      }
+    }
+  }
+}

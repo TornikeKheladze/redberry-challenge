@@ -199,13 +199,14 @@
 //mobile view
 @media (max-width: 500px) {
   .laptopFormPage {
+    top: 0;
+    width: 390px;
     .header {
       .back {
         left: 16px;
         top: 34px;
       }
-      top: 0;
-      width: 390px;
+
       .headers {
         margin-top: 31px;
         margin-bottom: -5px;
@@ -248,10 +249,11 @@
       flex-direction: column;
       align-items: baseline;
       justify-content: center;
-      left: 16px;
+      width: 390px;
       top: 326px;
       padding-bottom: 33px;
       div {
+        margin: auto;
         width: 358px;
         left: 24px;
         top: 8px;

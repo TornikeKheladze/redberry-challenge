@@ -56,65 +56,66 @@ const LaptopForm = () => {
     laptop_price: Yup.string().required("სავალდებულო"),
   });
 
-  const validate = ({
-    laptop_cpu,
-    laptop_brand_id,
-    laptop_name,
-    laptop_image,
-    laptop_cpu_cores,
-    laptop_cpu_threads,
-    laptop_ram,
-    laptop_hard_drive_type,
-    laptop_state,
-    laptop_price,
-  }) => {
-    let error = {};
-    let formData = {
-      laptop_cpu,
-      laptop_brand_id,
-      laptop_name,
-      laptop_cpu_cores,
-      laptop_cpu_threads,
-      laptop_ram,
-      laptop_hard_drive_type,
-      laptop_state,
-      laptop_price,
-    };
-    localStorage.setItem("laptopForm", JSON.stringify(formData));
+  // const validate = ({
+  //   laptop_cpu,
+  //   laptop_brand_id,
+  //   laptop_name,
+  //   laptop_image,
+  //   laptop_cpu_cores,
+  //   laptop_cpu_threads,
+  //   laptop_ram,
+  //   laptop_hard_drive_type,
+  //   laptop_state,
+  //   laptop_price,
+  // }) => {
+  //   let error = {};
+  //   let formData = {
+  //     laptop_cpu,
+  //     laptop_brand_id,
+  //     laptop_name,
+  //     laptop_cpu_cores,
+  //     laptop_cpu_threads,
+  //     laptop_ram,
+  //     laptop_hard_drive_type,
+  //     laptop_state,
+  //     laptop_price,
+  //   };
+  //   localStorage.setItem("laptopForm", JSON.stringify(formData));
 
-    if (!laptop_name || laptop_name.length < 2) {
-      error.laptop_name = "სავალდებულო";
-    }
-    if (!laptop_brand_id) {
-      error.laptop_brand_id = "სავალდებულო";
-    }
-    if (!laptop_cpu) {
-      error.laptop_cpu = "სავალდებულო";
-    }
-    if (!laptop_cpu_cores) {
-      error.laptop_cpu_cores = "სავალდებულო";
-    }
-    if (!laptop_cpu_threads) {
-      error.laptop_cpu_threads = "სავალდებულო";
-    }
-    if (!laptop_ram) {
-      error.laptop_ram = "სავალდებულო";
-    }
-    if (!laptop_hard_drive_type) {
-      error.laptop_hard_drive_type = "სავალდებულო";
-    }
-    if (!laptop_state) {
-      error.laptop_state = "სავალდებულო";
-    }
-    if (!laptop_price) {
-      error.laptop_price = "სავალდებულო";
-    }
-    if (!laptop_image) {
-      error.laptop_image = "სავალდებულო";
-    }
+  //   if (!laptop_name || laptop_name.length < 2) {
+  //     error.laptop_name = "სავალდებულო";
+  //   }
+  //   if (!laptop_brand_id) {
+  //     error.laptop_brand_id = "სავალდებულო";
+  //   }
+  //   if (!laptop_cpu) {
+  //     error.laptop_cpu = "სავალდებულო";
+  //   }
+  //   if (!laptop_cpu_cores) {
+  //     error.laptop_cpu_cores = "სავალდებულო";
+  //   }
+  //   if (!laptop_cpu_threads) {
+  //     error.laptop_cpu_threads = "სავალდებულო";
+  //   }
+  //   if (!laptop_ram) {
+  //     error.laptop_ram = "სავალდებულო";
+  //   }
+  //   if (!laptop_hard_drive_type) {
+  //     error.laptop_hard_drive_type = "სავალდებულო";
+  //   }
+  //   if (!laptop_state) {
+  //     error.laptop_state = "სავალდებულო";
+  //   }
+  //   if (!laptop_price) {
+  //     error.laptop_price = "სავალდებულო";
+  //   }
+  //   if (!laptop_image) {
+  //     error.laptop_image = "სავალდებულო";
+  //   }
 
-    return error;
-  };
+  //   return error;
+  // };
+
   const data = JSON.parse(localStorage.getItem("laptopForm"));
   if (data) initialValues = data;
 
@@ -134,8 +135,8 @@ const LaptopForm = () => {
         <Header active="laptop" to="/info/employee" />
         <Formik
           initialValues={initialValues}
-          validate={validate}
-          // validationSchema={validationSchema}
+          // validate={validate}
+          validationSchema={validationSchema}
           onSubmit={onSubmit}
         >
           {({ setFieldValue }) => (

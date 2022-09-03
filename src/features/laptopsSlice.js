@@ -23,7 +23,11 @@ export const fetchPositions = createAsyncThunk(
 export const createLaptop = createAsyncThunk(
   "laptop/createLaptop",
   async (formValues) => {
-    laptops.post("/laptop/create", { formValues });
+    const response = laptops.post("/laptop/create", {
+      ...formValues,
+      token: "5f6df051c0ff13b5d4cdc9400fa244c8",
+    });
+    return response.data;
   }
 );
 

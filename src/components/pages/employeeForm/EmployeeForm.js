@@ -66,6 +66,8 @@ const EmployeeForm = () => {
     } else if (name.length < 2) {
       error.name = "მინიმუმ 2 სიმბოლო";
     }
+    // } else if (/^[ა-ჰ]+$/) {
+    //   error.name = "შეიყვანეთ მხოლოდ ქართული ასოები";
 
     if (!surname) {
       error.surname = "სავალდებულო";

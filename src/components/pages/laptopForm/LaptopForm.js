@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 import "./LaptopForm.scss";
-import { fetchBrands, fetchCpus } from "../../../features/laptopsSlice";
+import {
+  createLaptop,
+  fetchBrands,
+  fetchCpus,
+} from "../../../features/laptopsSlice";
 import logo from "../../../assets/logo.png";
 import camera from "../../../assets/camera.png";
 import ImageInput from "./ImageInput";
@@ -76,10 +80,30 @@ const LaptopForm = () => {
     if (!laptop_price) {
       error.laptop_price = "სავალდებულო";
     }
+    if (!laptop_image) {
+      error.laptop_image = "სავალდებულო";
+    }
+
     return error;
   };
+  const allFormData = useSelector((store) => store.formData);
+
+  // let data = new FormData();
+  // data.append("data", "rame");
+  // console.log(data);
+
   const onSubmit = (values) => {
-    dispatch(submit(values));
+    const allValues = { ...allFormData, ...values };
+    let data = new FormData();
+    // data.append("formData", values);
+
+    Object.keys(allValues).forEach((key) => {
+      data.append(key, allValues[key]);
+    });
+    console.log(data);
+
+    // dispatch(submit(values));
+    dispatch(createLaptop({ ...data }));
   };
 
   return (
@@ -91,11 +115,20 @@ const LaptopForm = () => {
           validate={validate}
           onSubmit={onSubmit}
         >
-          <Form>
-            <div className="imageInput">
-              <Field name="laptop_image">
+          {({ setFieldValue }) => (
+            <Form id="forma">
+              <div className="imageInput">
+                <input
+                  id="file"
+                  name="file"
+                  type="file"
+                  onChange={(event) => {
+                    setFieldValue("laptop_image", event.currentTarget.files[0]);
+                  }}
+                />
+                {/* <Field name="laptop_image">
                 {(val) => {
-                  console.log(val);
+                  console.log({ val });
                   return (
                     <>
                       <div className="mobileView">
@@ -112,94 +145,95 @@ const LaptopForm = () => {
                     </>
                   );
                 }}
-              </Field>
-            </div>
-            <div className="fields">
-              <InputField
-                name="laptop_name"
-                type="text"
-                label="ლეპტოპის სახელი"
-                placeholder="HP"
-              />
-              {brands && (
-                <Dropdown
-                  data={brands}
-                  label="ლეპტოპის ბრენდი"
-                  fieldName="laptop_brand_id"
+              </Field> */}
+              </div>
+              <div className="fields">
+                <InputField
+                  name="laptop_name"
+                  type="text"
+                  label="ლეპტოპის სახელი"
+                  placeholder="HP"
                 />
-              )}
-            </div>
-            <div className="cpus">
-              {cpus && (
-                <Dropdown data={cpus} label="CPU" fieldName="laptop_cpu" />
-              )}
-              <InputField
-                type="text"
-                name="laptop_cpu_cores"
-                label="CPU-ს ბირთვი"
-                placeholder="14"
-              />
-              <InputField
-                type="text"
-                name="laptop_cpu_threads"
-                label="CPU-ს ნაკადი"
-                placeholder="365"
-              />
-            </div>
-            <div className="rams">
-              <InputField
-                type="text"
-                label="ლეპტოპის RAM (GB)"
-                placeholder="16"
-                name="laptop_ram"
-                className="ram"
-              />
-              <div className="memory">
-                <RadioInput
-                  name="laptop_hard_drive_type"
-                  label="მეხსიერების ტიპი"
-                  value1="ssd"
-                  value2="hdd"
-                  label1="SSD"
-                  label2="HDD"
+                {brands && (
+                  <Dropdown
+                    data={brands}
+                    label="ლეპტოპის ბრენდი"
+                    fieldName="laptop_brand_id"
+                  />
+                )}
+              </div>
+              <div className="cpus">
+                {cpus && (
+                  <Dropdown data={cpus} label="CPU" fieldName="laptop_cpu" />
+                )}
+                <InputField
+                  type="text"
+                  name="laptop_cpu_cores"
+                  label="CPU-ს ბირთვი"
+                  placeholder="14"
+                />
+                <InputField
+                  type="text"
+                  name="laptop_cpu_threads"
+                  label="CPU-ს ნაკადი"
+                  placeholder="365"
                 />
               </div>
-            </div>
-            <div className="price rams">
-              <InputField
-                type="text"
-                placeholder="დდ/თთ/წწწწ"
-                label="შეძენის რიცხვი (არჩევითი)"
-                name="laptop_purchase_date"
-                className="ram"
-              />
-              <InputField
-                type="text"
-                placeholder="0000"
-                label="ლეპტოპის ფასი"
-                name="laptop_price"
-                className="ram"
-              />
-            </div>
-            <div className="laptopState">
-              <RadioInput
-                name="laptop_state"
-                label="ლეპტოპის მდგომარეობა"
-                value1="ახალი"
-                value2="მეორადი"
-                label1="ახალი"
-                label2="მეორადი"
-              />
-            </div>
-            <div className="buttons">
-              <button className="goBack" type="button">
-                უკან
-              </button>
-              <button className="submitBtn" type="submit">
-                დამახსოვრება
-              </button>
-            </div>
-          </Form>
+              <div className="rams">
+                <InputField
+                  type="text"
+                  label="ლეპტოპის RAM (GB)"
+                  placeholder="16"
+                  name="laptop_ram"
+                  className="ram"
+                />
+                <div className="memory">
+                  <RadioInput
+                    name="laptop_hard_drive_type"
+                    label="მეხსიერების ტიპი"
+                    value1="ssd"
+                    value2="hdd"
+                    label1="SSD"
+                    label2="HDD"
+                  />
+                </div>
+              </div>
+              <div className="price rams">
+                <InputField
+                  type="text"
+                  placeholder="დდ/თთ/წწწწ"
+                  label="შეძენის რიცხვი (არჩევითი)"
+                  name="laptop_purchase_date"
+                  className="ram"
+                />
+                <InputField
+                  type="text"
+                  placeholder="0000"
+                  label="ლეპტოპის ფასი"
+                  name="laptop_price"
+                  className="ram"
+                />
+              </div>
+              <div className="laptopState">
+                <RadioInput
+                  name="laptop_state"
+                  label="ლეპტოპის მდგომარეობა"
+                  value1="new"
+                  value2="მეორადი"
+                  label1="used"
+                  label2="მეორადი"
+                />
+              </div>
+              <div className="buttons">
+                <button className="goBack" type="button">
+                  უკან
+                </button>
+                <button className="submitBtn" type="submit">
+                  დამახსოვრება
+                </button>
+              </div>
+            </Form>
+          )}
         </Formik>
       </div>
       <div className="employee-logo">

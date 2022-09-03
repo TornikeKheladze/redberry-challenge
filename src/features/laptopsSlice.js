@@ -23,10 +23,15 @@ export const fetchPositions = createAsyncThunk(
 export const createLaptop = createAsyncThunk(
   "laptop/createLaptop",
   async (formValues) => {
-    const response = laptops.post("/laptop/create", {
-      ...formValues,
-      token: "5f6df051c0ff13b5d4cdc9400fa244c8",
-    });
+    const response = laptops.post(
+      "/laptop/create",
+      { ...formValues, token: "5f6df051c0ff13b5d4cdc9400fa244c8" },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     return response.data;
   }
 );

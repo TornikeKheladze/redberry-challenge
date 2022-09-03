@@ -8,7 +8,7 @@ const Dropdown = ({ data, label, fieldName, className }) => {
         </option>
         {data &&
           data.map(({ name, id }) => (
-            <option key={id} value={id}>
+            <option key={id} value={fieldName === "laptop_cpu" ? name : id}>
               {name}
             </option>
           ))}

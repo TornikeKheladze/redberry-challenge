@@ -18,6 +18,14 @@ const EmployeeForm = () => {
   const [filteredPositions, setFilteredPositions] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  let initialValues = {
+    name: "",
+    surname: "",
+    team_id: "",
+    position_id: "",
+    phone_number: "",
+    email: "",
+  };
   useEffect(() => {
     dispatch(fetchTeams());
     dispatch(fetchPositions());
@@ -32,21 +40,11 @@ const EmployeeForm = () => {
       );
   }, [positions]);
 
-  let initialValues = {
-    name: "",
-    surname: "",
-    team_id: "",
-    position_id: "",
-    phone_number: "",
-    email: "",
-  };
-
   const onSubmit = (values) => {
     dispatch(submit(values));
-    localStorage.clear("form/employee");
     navigate("/info/laptop");
   };
-  const data = JSON.parse(localStorage.getItem("form/employee"));
+  const data = JSON.parse(localStorage.getItem("employeeForm"));
   if (data) initialValues = data;
 
   const validate = ({
@@ -59,7 +57,7 @@ const EmployeeForm = () => {
   }) => {
     let error = {};
     let formData = { name, surname, team_id, position_id, phone_number, email };
-    localStorage.setItem("form/employee", JSON.stringify(formData));
+    localStorage.setItem("employeeForm", JSON.stringify(formData));
 
     if (!name) {
       error.name = "სავალდებულო";

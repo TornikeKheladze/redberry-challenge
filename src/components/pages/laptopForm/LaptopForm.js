@@ -1,6 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import * as Yup from "yup";
 
 import "./LaptopForm.scss";
 import {
@@ -19,13 +20,6 @@ import { submit } from "../../../features/formSlice";
 
 const LaptopForm = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchCpus());
-    dispatch(fetchBrands());
-  }, []);
-  const cpus = useSelector(({ generals }) => generals.cpus);
-  const brands = useSelector(({ generals }) => generals.brands);
-
   let initialValues = {
     laptop_brand_id: "",
     laptop_name: "",
@@ -40,6 +34,28 @@ const LaptopForm = () => {
     laptop_price: "",
   };
 
+  useEffect(() => {
+    dispatch(fetchCpus());
+    dispatch(fetchBrands());
+  }, []);
+
+  const cpus = useSelector(({ generals }) => generals.cpus);
+  const brands = useSelector(({ generals }) => generals.brands);
+  const employeeFormData = useSelector(({ formData }) => formData.formData);
+
+  const validationSchema = Yup.object({
+    laptop_cpu: Yup.string().required("სავალდებულო"),
+    laptop_brand_id: Yup.string().required("სავალდებულო"),
+    laptop_name: Yup.string().required("სავალდებულო"),
+    laptop_image: Yup.string().required("სავალდებულო"),
+    laptop_cpu_cores: Yup.string().required("სავალდებულო"),
+    laptop_cpu_threads: Yup.string().required("სავალდებულო"),
+    laptop_ram: Yup.string().required("სავალდებულო"),
+    laptop_hard_drive_type: Yup.string().required("სავალდებულო"),
+    laptop_state: Yup.string().required("სავალდებულო"),
+    laptop_price: Yup.string().required("სავალდებულო"),
+  });
+
   const validate = ({
     laptop_cpu,
     laptop_brand_id,
@@ -53,7 +69,20 @@ const LaptopForm = () => {
     laptop_price,
   }) => {
     let error = {};
-    if (!laptop_name) {
+    let formData = {
+      laptop_cpu,
+      laptop_brand_id,
+      laptop_name,
+      laptop_cpu_cores,
+      laptop_cpu_threads,
+      laptop_ram,
+      laptop_hard_drive_type,
+      laptop_state,
+      laptop_price,
+    };
+    localStorage.setItem("laptopForm", JSON.stringify(formData));
+
+    if (!laptop_name || laptop_name.length < 2) {
       error.laptop_name = "სავალდებულო";
     }
     if (!laptop_brand_id) {
@@ -86,24 +115,17 @@ const LaptopForm = () => {
 
     return error;
   };
-  const allFormData = useSelector((store) => store.formData);
-
-  // let data = new FormData();
-  // data.append("data", "rame");
-  // console.log(data);
+  const data = JSON.parse(localStorage.getItem("laptopForm"));
+  if (data) initialValues = data;
 
   const onSubmit = (values) => {
-    const allValues = { ...allFormData, ...values };
+    const allValues = { ...employeeFormData, ...values };
     let data = new FormData();
-    // data.append("formData", values);
-
     Object.keys(allValues).forEach((key) => {
       data.append(key, allValues[key]);
     });
-    console.log(data);
-
-    // dispatch(submit(values));
-    dispatch(createLaptop({ ...data }));
+    dispatch(createLaptop(allValues));
+    localStorage.clear("form");
   };
 
   return (
@@ -113,6 +135,7 @@ const LaptopForm = () => {
         <Formik
           initialValues={initialValues}
           validate={validate}
+          // validationSchema={validationSchema}
           onSubmit={onSubmit}
         >
           {({ setFieldValue }) => (
@@ -191,14 +214,15 @@ const LaptopForm = () => {
                   <RadioInput
                     name="laptop_hard_drive_type"
                     label="მეხსიერების ტიპი"
-                    value1="ssd"
-                    value2="hdd"
+                    value1="SSD"
+                    value2="HDD"
                     label1="SSD"
                     label2="HDD"
                   />
                 </div>
               </div>
               <div className="price rams">
+                {/* თარიღი სწორად */}
                 <InputField
                   type="text"
                   placeholder="დდ/თთ/წწწწ"
@@ -219,8 +243,8 @@ const LaptopForm = () => {
                   name="laptop_state"
                   label="ლეპტოპის მდგომარეობა"
                   value1="new"
-                  value2="მეორადი"
-                  label1="used"
+                  value2="used"
+                  label1="ახალი"
                   label2="მეორადი"
                 />
               </div>

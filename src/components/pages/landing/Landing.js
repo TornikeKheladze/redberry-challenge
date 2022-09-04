@@ -22,7 +22,9 @@ const Landing = () => {
         <button>
           <Link to="/info/employee">ჩანაწერის დამატება</Link>
         </button>
-        <button>ჩანაწერების სია</button>
+        <button>
+          <Link to="laptop/list">ჩანაწერების სია</Link>
+        </button>
       </div>
     </div>
   );

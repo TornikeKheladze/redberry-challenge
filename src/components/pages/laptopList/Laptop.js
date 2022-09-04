@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 const Laptop = ({ data }) => {
-  console.log(data.laptop);
   return (
     <div className="laptop">
       <img

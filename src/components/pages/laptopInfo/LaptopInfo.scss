@@ -1,0 +1,211 @@
+.listHeader {
+  // width: 1920px;
+  button {
+    margin-left: 90px;
+    margin-top: 72px;
+    background-color: rgba(217, 217, 217, 1);
+    height: 53px;
+    width: 53px;
+    border-radius: 50%;
+    border: none;
+    img {
+      height: 16px;
+    }
+  }
+  h1 {
+    margin-left: 681px;
+    display: inline-block;
+    font-size: 34px;
+    font-weight: 700;
+  }
+}
+
+.laptopInfo {
+  width: 1187px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  .mainInfo {
+    margin-top: 84px;
+    display: flex;
+    gap: 68px;
+    border-bottom: 1px solid rgba(165, 165, 165, 1);
+    img {
+      height: 342px;
+      width: 577px;
+      margin-bottom: 84px;
+    }
+    .ownerInfo {
+      display: flex;
+      gap: 80px;
+      div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+      }
+      .labels {
+        font-size: 22px;
+        font-weight: 700;
+        width: 161px;
+        height: 270px;
+      }
+      .values {
+        color: rgba(121, 121, 121, 1);
+        font-size: 22px;
+        font-weight: 500;
+        width: 285px;
+        height: 270px;
+      }
+    }
+  }
+  .secondary {
+    margin-top: 54px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(165, 165, 165, 1);
+    .labels {
+      color: rgba(46, 46, 46, 1);
+      font-size: 22px;
+      font-weight: 600;
+      height: 243px;
+      width: 212px;
+    }
+    .values {
+      color: rgba(121, 121, 121, 1);
+      font-size: 22px;
+      font-weight: 500;
+      width: 134px;
+    }
+    .labels,
+    .values {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    .cpuVal {
+      width: 164px;
+    }
+  }
+  .stateInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 54px;
+    padding-bottom: 70px;
+    .left {
+      display: flex;
+      gap: 25px;
+      .labels {
+        font-size: 22px;
+        font-weight: 600;
+      }
+      .values {
+        color: rgba(121, 121, 121, 1);
+        font-size: 22px;
+        font-weight: 500;
+      }
+      .labels,
+      .values {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+    }
+    .date {
+      display: flex;
+      gap: 50px;
+      p {
+        font-size: 22px;
+        font-weight: 600;
+      }
+      span {
+        color: rgba(121, 121, 121, 1);
+        font-size: 22px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .listHeader {
+    button {
+      margin: 0;
+      background-color: white;
+      width: 16px;
+      height: 16px;
+      border-radius: 0;
+      margin-left: 16px;
+      margin-top: 34px;
+      margin-bottom: 34px;
+    }
+    h1 {
+      margin-left: 96px;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 20px;
+      letter-spacing: 0em;
+      text-align: center;
+    }
+  }
+  .laptopInfo {
+    width: 358px;
+    .mainInfo {
+      flex-direction: column;
+      width: 358px;
+      padding-bottom: 30px;
+      border-bottom: 0.6px solid rgba(165, 165, 165, 1);
+      img {
+        width: 358px;
+      }
+      .ownerInfo {
+        gap: 61px;
+        .labels,
+        .values {
+          font-size: 14px;
+          line-height: 25px;
+          height: 146px;
+          width: 126px;
+        }
+      }
+    }
+    .secondary {
+      margin-top: 23px;
+      display: block;
+      padding-bottom: 21px;
+      .labels,
+      .values {
+        font-size: 14px;
+        line-height: 25px;
+        display: inline-block;
+        width: 50%;
+        height: 80px;
+      }
+    }
+    .stateInfo {
+      display: block;
+      .left {
+        .labels {
+          gap: 15px;
+          font-size: 14px;
+          font-weight: 600;
+        }
+        .values {
+          gap: 15px;
+          font-size: 14px;
+          font-weight: 600;
+        }
+      }
+      .date {
+        margin-top: 15px;
+        p {
+          font-size: 14px;
+          font-weight: 600;
+        }
+        span {
+          font-size: 14px;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}

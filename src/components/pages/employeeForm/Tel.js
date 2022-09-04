@@ -1,10 +1,20 @@
 import { Field, ErrorMessage } from "formik";
 const Email = () => {
+  const phoneValidate = (value) => {
+    let error;
+    if (!value) {
+      error = "სავალდებულო";
+    } else if (value.slice(0, 4) !== "+995" || value.length !== 13) {
+      error = "გთხოვთ შეიყვანოთ ვალიდური ნომერი (+995*******) ";
+    }
+    return error;
+  };
   return (
     <div className="telNum">
       <div>
         <label htmlFor="phone_number">ტელეფონის ნომერი</label>
         <Field
+          validate={phoneValidate}
           type="text"
           id="phone_number"
           name="phone_number"

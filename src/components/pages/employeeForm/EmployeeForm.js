@@ -1,14 +1,16 @@
-import "./EmployeeForm.scss";
 import { Formik, Form } from "formik";
-import Header from "../../Header";
-import logo from "../../../assets/logo.png";
+import * as Yup from "yup";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import "./EmployeeForm.scss";
+import Header from "../../Header";
+import logo from "../../../assets/logo.png";
 import { fetchPositions, fetchTeams } from "../../../features/laptopsSlice";
 import Email from "./Email";
 import Tel from "./Tel";
 import InputField from "./InputField";
-import { useNavigate } from "react-router-dom";
 import { submit } from "../../../features/formSlice";
 import Dropdown from "../laptopForm/Dropdown";
 
@@ -40,67 +42,39 @@ const EmployeeForm = () => {
       );
   }, [positions]);
 
+  const data = JSON.parse(localStorage.getItem("employeeForm"));
+
+  if (data) initialValues = data;
+
+  const validationSchema = Yup.object({
+    name: Yup.string().min(2, "მინიმუმ 2 სიმბოლო").required("სავალდებულო"),
+    surname: Yup.string().min(2, "მინიმუმ 2 სიმბოლო").required("სავალდებულო"),
+    position_id: Yup.string().required("სავალდებულო"),
+    phone_number: Yup.string().required("სავალდებულო"),
+  });
+
+  const getFormValues = (values) => {
+    localStorage.setItem("employeeForm", JSON.stringify(values));
+  };
+
+  const positionsFilter = (values) => {
+    setFilteredPositions(
+      positions.filter((position) => Number(values) === position.team_id)
+    );
+    let error;
+    if (!values) error = "სავალდებულო";
+    return error;
+  };
+
+  const nameValidate = (value) => {
+    let error;
+    if (!/^[ა-ჰ]+$/.test(value)) error = "შეიყვანეთ მხოლოდ ქართული ასოები";
+    return error;
+  };
+
   const onSubmit = (values) => {
     dispatch(submit(values));
     navigate("/info/laptop");
-  };
-  const data = JSON.parse(localStorage.getItem("employeeForm"));
-  if (data) initialValues = data;
-
-  const validate = ({
-    name,
-    surname,
-    team_id,
-    position_id,
-    phone_number,
-    email,
-  }) => {
-    let error = {};
-    let formData = { name, surname, team_id, position_id, phone_number, email };
-    localStorage.setItem("employeeForm", JSON.stringify(formData));
-
-    if (!name) {
-      error.name = "სავალდებულო";
-    } else if (name.length < 2) {
-      error.name = "მინიმუმ 2 სიმბოლო";
-    }
-    // } else if (/^[ა-ჰ]+$/) {
-    //   error.name = "შეიყვანეთ მხოლოდ ქართული ასოები";
-
-    if (!surname) {
-      error.surname = "სავალდებულო";
-    } else if (surname.length < 2) {
-      error.surname = "მინიმუმ 2 სიმბოლო";
-    }
-
-    if (!team_id) {
-      error.team_id = "სავალდებულო";
-    } else {
-      setFilteredPositions(
-        positions.filter((position) => Number(team_id) === position.team_id)
-      );
-    }
-
-    if (!position_id) {
-      error.position_id = "სავალდებულო";
-    }
-
-    if (!email) {
-      error.email = "სავალდებულო";
-    } else if (email.slice(-12) !== "@redberry.ge") {
-      error.email = "მეილი უნდა მთავრდებოდეს @redberry.ge";
-    }
-
-    if (!phone_number) {
-      error.phone_number = "სავალდებულო";
-    } else if (
-      phone_number.slice(0, 4) !== "+995" ||
-      phone_number.length !== 13
-    ) {
-      error.phone_number = "გთხოვთ შეიყვანოთ ვალიდური ნომერი (+995*******) ";
-    }
-
-    return error;
   };
 
   return (
@@ -109,49 +83,57 @@ const EmployeeForm = () => {
         <Header active="employee" to="/" />
         <Formik
           initialValues={initialValues}
-          validate={validate}
+          validationSchema={validationSchema}
           onSubmit={onSubmit}
         >
-          <Form className="employeeForm">
-            <div className="fields names">
-              <InputField
-                name="name"
-                type="text"
-                label="სახელი"
-                placeholder="გრიშა"
-              />
-              <InputField
-                name="surname"
-                type="text"
-                label="გვარი"
-                placeholder="ბაგრატიონი"
-              />
-            </div>
+          {({ values }) => {
+            getFormValues(values);
+            return (
+              <Form className="employeeForm">
+                <div className="fields names">
+                  <InputField
+                    name="name"
+                    type="text"
+                    label="სახელი"
+                    placeholder="გრიშა"
+                    validate={nameValidate}
+                  />
+                  <InputField
+                    name="surname"
+                    type="text"
+                    label="გვარი"
+                    placeholder="ბაგრატიონი"
+                    validate={nameValidate}
+                  />
+                </div>
 
-            {teams && (
-              <Dropdown
-                data={teams}
-                className="team dropdown"
-                label="თიმი"
-                fieldName="team_id"
-              />
-            )}
+                {teams && (
+                  <Dropdown
+                    positionsFilter={positionsFilter}
+                    data={teams}
+                    className="team dropdown"
+                    label="თიმი"
+                    fieldName="team_id"
+                  />
+                )}
 
-            {positions && (
-              <Dropdown
-                data={filteredPositions}
-                className="position dropdown"
-                label="პოზიცია"
-                fieldName="position_id"
-              />
-            )}
-            <Email />
-            <Tel />
+                {positions && (
+                  <Dropdown
+                    data={filteredPositions}
+                    className="position dropdown"
+                    label="პოზიცია"
+                    fieldName="position_id"
+                  />
+                )}
+                <Email />
+                <Tel />
 
-            <button className="submitButton" type="submit">
-              შემდეგი
-            </button>
-          </Form>
+                <button className="submitButton" type="submit">
+                  შემდეგი
+                </button>
+              </Form>
+            );
+          }}
         </Formik>
       </div>
       <div className="employee-logo">

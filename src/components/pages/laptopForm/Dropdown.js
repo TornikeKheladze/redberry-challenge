@@ -1,8 +1,13 @@
 import { Field, ErrorMessage } from "formik";
-const Dropdown = ({ data, label, fieldName, className }) => {
+const Dropdown = ({ data, label, fieldName, className, positionsFilter }) => {
   return (
     <div className={className}>
-      <Field as="select" name={fieldName} id={fieldName}>
+      <Field
+        as="select"
+        name={fieldName}
+        id={fieldName}
+        validate={positionsFilter && positionsFilter}
+      >
         <option value="" disabled hidden>
           {label}
         </option>

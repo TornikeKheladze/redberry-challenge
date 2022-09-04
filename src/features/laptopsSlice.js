@@ -35,12 +35,22 @@ export const createLaptop = createAsyncThunk(
     return response.data;
   }
 );
+export const fetchLaptops = createAsyncThunk(
+  "laptop/fetchLaptops",
+  async () => {
+    const response = await laptops.get(
+      "/laptops?token=5f6df051c0ff13b5d4cdc9400fa244c8"
+    );
+    return response.data;
+  }
+);
 
 const initialState = {
   teams: [],
   brands: [],
   cpus: [],
   positions: [],
+  laptops: [],
 };
 
 const laptopSlice = createSlice({
@@ -58,6 +68,9 @@ const laptopSlice = createSlice({
     },
     [fetchPositions.fulfilled]: (store, { payload }) => {
       store.positions = payload.data;
+    },
+    [fetchLaptops.fulfilled]: (store, { payload }) => {
+      store.laptops = payload.data;
     },
   },
 });

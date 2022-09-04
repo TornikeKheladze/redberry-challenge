@@ -73,6 +73,7 @@ const LaptopForm = () => {
     setShowPopup(true);
   };
   const getFormValues = (values) => {
+    console.log(values.laptop_image);
     localStorage.setItem("laptopForm", JSON.stringify(values));
   };
   const laptopNameValidate = (value) => {

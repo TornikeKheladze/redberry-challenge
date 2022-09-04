@@ -1,0 +1,136 @@
+.laptopList {
+  background-color: white;
+  .listHeader {
+    width: 100%;
+    button {
+      margin-left: 90px;
+      margin-top: 72px;
+      background-color: rgba(217, 217, 217, 1);
+      height: 53px;
+      width: 53px;
+      border-radius: 50%;
+      border: none;
+      img {
+        height: 16px;
+      }
+    }
+    h1 {
+      margin-left: 681px;
+      display: inline-block;
+      font-size: 34px;
+      font-weight: 700;
+    }
+  }
+  .renderList {
+    padding-top: 85px;
+    padding-bottom: 168px;
+    width: 1187px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 52px;
+    row-gap: 55px;
+    .laptop {
+      background-color: rgba(234, 250, 255, 1);
+      border: 1px solid rgba(174, 209, 234, 1);
+      height: 205px;
+      width: 563px;
+      border-radius: 20px;
+      display: flex;
+      img {
+        height: 178px;
+        width: 266px;
+        margin-left: 14px;
+        margin-top: 14px;
+        border-radius: 10px;
+      }
+      .listInfo {
+        margin-top: 45px;
+        margin-left: 28px;
+        p {
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 18px;
+        }
+        .second {
+          font-family: Helvetica Neue;
+          font-weight: 500;
+        }
+        a {
+          display: inline-block;
+          font-size: 18px;
+          font-weight: 500;
+          margin-bottom: 18px;
+          margin-top: 22px;
+          border: none;
+          background-color: rgba(234, 250, 255, 1);
+          text-decoration: underline;
+          color: rgba(67, 134, 169, 1);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .laptopList {
+    .listHeader {
+      button {
+        margin: 0;
+        background-color: white;
+        width: 16px;
+        height: 16px;
+        border-radius: 0;
+        margin-left: 16px;
+        margin-top: 34px;
+        margin-bottom: 34px;
+      }
+      h1 {
+        margin-left: 96px;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 20px;
+        letter-spacing: 0em;
+        text-align: center;
+      }
+    }
+    .renderList {
+      padding-top: 0;
+      padding-bottom: 51px;
+      margin-top: 33px;
+      width: 358px;
+      display: flex;
+      gap: 26px;
+      flex-direction: column;
+      .laptop {
+        width: 100%;
+        height: 123px;
+        img {
+          width: 164px;
+          height: 109px;
+          margin-left: 7px;
+          margin-top: 7px;
+          border-radius: 6px;
+          margin-right: 16px;
+        }
+        .listInfo {
+          margin: 0;
+          margin-top: 19px;
+          p {
+            font-size: 14px;
+            margin-bottom: 8px;
+          }
+          .second {
+            font-size: 18px;
+            font-weight: 400;
+          }
+          a {
+            margin-top: 3px;
+            font-size: 14px;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+}

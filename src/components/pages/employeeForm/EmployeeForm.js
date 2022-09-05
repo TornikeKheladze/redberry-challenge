@@ -11,9 +11,7 @@ import { fetchPositions, fetchTeams } from "../../../features/laptopsSlice";
 import Email from "./Email";
 import Tel from "./Tel";
 import InputField from "./InputField";
-import { submit } from "../../../features/formSlice";
 import Dropdown from "../laptopForm/Dropdown";
-
 const EmployeeForm = () => {
   const teams = useSelector((store) => store.generals.teams);
   const positions = useSelector((store) => store.generals.positions);
@@ -73,7 +71,6 @@ const EmployeeForm = () => {
   };
 
   const onSubmit = (values) => {
-    dispatch(submit(values));
     navigate("/info/laptop");
   };
 
@@ -86,7 +83,7 @@ const EmployeeForm = () => {
           validationSchema={validationSchema}
           onSubmit={onSubmit}
         >
-          {({ values }) => {
+          {({ values, errors, touched }) => {
             getFormValues(values);
             return (
               <Form className="employeeForm">
@@ -97,6 +94,7 @@ const EmployeeForm = () => {
                     label="სახელი"
                     placeholder="გრიშა"
                     validate={nameValidate}
+                    error={touched.name && errors.name}
                   />
                   <InputField
                     name="surname"
@@ -104,6 +102,7 @@ const EmployeeForm = () => {
                     label="გვარი"
                     placeholder="ბაგრატიონი"
                     validate={nameValidate}
+                    error={touched.surname && errors.surname}
                   />
                 </div>
 
@@ -114,6 +113,7 @@ const EmployeeForm = () => {
                     className="team dropdown"
                     label="თიმი"
                     fieldName="team_id"
+                    error={touched.team_id && errors.name}
                   />
                 )}
 
@@ -123,11 +123,11 @@ const EmployeeForm = () => {
                     className="position dropdown"
                     label="პოზიცია"
                     fieldName="position_id"
+                    error={touched.position_id && errors.name}
                   />
                 )}
-                <Email />
-                <Tel />
-
+                <Email error={touched.email && errors.email} />
+                <Tel error={touched.phone_number && errors.phone_number} />
                 <button className="submitButton" type="submit">
                   შემდეგი
                 </button>

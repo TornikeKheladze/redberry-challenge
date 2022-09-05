@@ -1,7 +1,14 @@
 import { Field, ErrorMessage } from "formik";
-const Dropdown = ({ data, label, fieldName, className, positionsFilter }) => {
+const Dropdown = ({
+  data,
+  label,
+  fieldName,
+  className,
+  positionsFilter,
+  error,
+}) => {
   return (
-    <div className={className}>
+    <div className={className} id={error && "ERROR"}>
       <Field
         as="select"
         name={fieldName}
@@ -18,9 +25,6 @@ const Dropdown = ({ data, label, fieldName, className, positionsFilter }) => {
             </option>
           ))}
       </Field>
-      <ErrorMessage name={fieldName}>
-        {(err) => <div className="error">{err}</div>}
-      </ErrorMessage>
     </div>
   );
 };

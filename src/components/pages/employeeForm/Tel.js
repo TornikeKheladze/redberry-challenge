@@ -1,5 +1,5 @@
 import { Field, ErrorMessage } from "formik";
-const Email = () => {
+const Email = ({ error }) => {
   const phoneValidate = (value) => {
     let error;
     if (!value) {
@@ -10,7 +10,7 @@ const Email = () => {
     return error;
   };
   return (
-    <div className="telNum">
+    <div className="telNum" id={error && "ERROR"}>
       <div>
         <label htmlFor="phone_number">ტელეფონის ნომერი</label>
         <Field

@@ -7,9 +7,10 @@ const InputField = ({
   placeholder,
   className,
   validate,
+  error,
 }) => {
   return (
-    <div className={className}>
+    <div className={className} id={error && "ERROR"}>
       <label htmlFor={name}>{label}</label>
       <Field
         type={type}

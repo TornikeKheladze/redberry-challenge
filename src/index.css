@@ -35,3 +35,12 @@ a {
 .error {
   color: rgba(229, 47, 47, 1);
 }
+#ERROR {
+  color: rgba(229, 47, 47, 1);
+}
+#ERROR input {
+  border: 1px solid rgba(229, 47, 47, 1);
+}
+#ERROR select {
+  border: 1px solid rgba(229, 47, 47, 1);
+}

@@ -25,7 +25,7 @@ export const createLaptop = createAsyncThunk(
   async (formValues) => {
     const response = laptops.post(
       "/laptop/create",
-      { ...formValues, token: "5f6df051c0ff13b5d4cdc9400fa244c8" },
+      { ...formValues, token: "7e1b5dc582a55b9bf29e4b7916dd6e90" },
       {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -39,7 +39,7 @@ export const fetchLaptops = createAsyncThunk(
   "laptop/fetchLaptops",
   async () => {
     const response = await laptops.get(
-      "/laptops?token=5f6df051c0ff13b5d4cdc9400fa244c8"
+      "/laptops?token=7e1b5dc582a55b9bf29e4b7916dd6e90"
     );
     return response.data;
   }
@@ -48,7 +48,7 @@ export const fetchSingleLaptop = createAsyncThunk(
   "laptop/fetchSingleLaptop",
   async (id) => {
     const response = await laptops.get(
-      `/laptop/${id}?token=5f6df051c0ff13b5d4cdc9400fa244c8`
+      `/laptop/${id}?token=7e1b5dc582a55b9bf29e4b7916dd6e90`
     );
     return response.data;
   }

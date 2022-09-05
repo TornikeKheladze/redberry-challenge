@@ -7,7 +7,7 @@ import {
 } from "../../../features/laptopsSlice";
 import leftArrow from "../../../assets/left-button.png";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 

@@ -9,14 +9,18 @@ import {
   fetchBrands,
   fetchCpus,
 } from "../../../features/laptopsSlice";
+
+import checked from "../../../assets/done.png";
 import logo from "../../../assets/logo.png";
 import camera from "../../../assets/camera.png";
-import ImageInput from "./ImageInput";
+import errorImg from "../../../assets/error.png";
+
 import InputField from "../employeeForm/InputField";
 import Header from "../../Header";
 import Dropdown from "./Dropdown";
 import RadioInput from "./RadioInput";
 import Popup from "./Popup";
+import { Link } from "react-router-dom";
 
 const LaptopForm = () => {
   const dispatch = useDispatch();
@@ -43,7 +47,6 @@ const LaptopForm = () => {
 
   const cpus = useSelector(({ generals }) => generals.cpus);
   const brands = useSelector(({ generals }) => generals.brands);
-  const employeeFormData = useSelector(({ formData }) => formData.formData);
 
   const validationSchema = Yup.object({
     laptop_cpu: Yup.string().required("სავალდებულო"),
@@ -56,13 +59,17 @@ const LaptopForm = () => {
     laptop_hard_drive_type: Yup.string().required("სავალდებულო"),
     laptop_state: Yup.string().required("სავალდებულო"),
     laptop_price: Yup.string().required("სავალდებულო"),
+    laptop_image: Yup.string().required("სავალდებულო"),
   });
 
   const data = JSON.parse(localStorage.getItem("laptopForm"));
   if (data) initialValues = data;
-
+  console.log();
   const onSubmit = (values) => {
-    const allValues = { ...employeeFormData, ...values };
+    const allValues = {
+      ...JSON.parse(localStorage.getItem("employeeForm")),
+      ...values,
+    };
     let data = new FormData();
     Object.keys(allValues).forEach((key) => {
       data.append(key, allValues[key]);
@@ -73,7 +80,6 @@ const LaptopForm = () => {
     setShowPopup(true);
   };
   const getFormValues = (values) => {
-    console.log(values.laptop_image);
     localStorage.setItem("laptopForm", JSON.stringify(values));
   };
   const laptopNameValidate = (value) => {
@@ -94,30 +100,83 @@ const LaptopForm = () => {
           validationSchema={validationSchema}
           onSubmit={onSubmit}
         >
-          {({ setFieldValue, values }) => {
+          {({ setFieldValue, values, errors, touched }) => {
             getFormValues(values);
             return (
-              <Form id="forma">
-                <div className="imageInput">
-                  <input
-                    id="file"
-                    name="file"
-                    type="file"
-                    onChange={(event) => {
-                      // setLaptopImage(event.currentTarget.files[0]);
-                      setFieldValue(
-                        "laptop_image",
-                        event.currentTarget.files[0]
+              <Form>
+                {laptopImage && (
+                  <img src={laptopImage.url} className="uploadedImage" />
+                )}
+                <div
+                  className={`imageInput ${laptopImage && "hide"}`}
+                  id={
+                    touched.laptop_image && errors.laptop_image && "imageError"
+                  }
+                >
+                  <Field name="laptop_image">
+                    {() => {
+                      return (
+                        <>
+                          <div className="mobileView">
+                            <img src={camera} alt="camera" />
+                          </div>
+                          <label htmlFor="file" className="mobileView">
+                            ლეპტოპის ფოტოს ატვირთვა
+                            {touched.laptop_image && errors.laptop_image && (
+                              <img src={errorImg} />
+                            )}
+                          </label>
+
+                          <p className="p">
+                            {touched.laptop_image && errors.laptop_image && (
+                              <img src={errorImg} />
+                            )}
+                            ჩააგდე ან ატვირთე ლეპტოპის ფოტო
+                          </p>
+                          <label htmlFor="file" className="desktopView">
+                            ატვირთე
+                            <input
+                              id="file"
+                              name="file"
+                              type="file"
+                              onChange={(event) => {
+                                const lpImg = {
+                                  url: URL.createObjectURL(
+                                    event.currentTarget.files[0]
+                                  ),
+                                  file: event.currentTarget.files[0],
+                                };
+                                setLaptopImage(lpImg);
+                                setFieldValue(
+                                  "laptop_image",
+                                  event.currentTarget.files[0]
+                                );
+                              }}
+                            />
+                          </label>
+                        </>
                       );
                     }}
-                  />
+                  </Field>
                 </div>
+
+                {laptopImage && laptopImage.file && (
+                  <div className="uploaded">
+                    <div>
+                      <img src={checked} />
+                      {laptopImage.file.name}
+                    </div>
+                    <label htmlFor="file"> თავიდან ატვირთე</label>
+                  </div>
+                )}
+
                 <div className="fields">
                   <InputField
                     name="laptop_name"
                     type="text"
                     label="ლეპტოპის სახელი"
                     placeholder="HP"
+                    error={touched.laptop_name && errors.laptop_name}
                     validate={laptopNameValidate}
                   />
                   {brands && (
@@ -125,24 +184,35 @@ const LaptopForm = () => {
                       data={brands}
                       label="ლეპტოპის ბრენდი"
                       fieldName="laptop_brand_id"
+                      error={touched.laptop_brand_id && errors.laptop_brand_id}
                     />
                   )}
                 </div>
                 <div className="cpus">
                   {cpus && (
-                    <Dropdown data={cpus} label="CPU" fieldName="laptop_cpu" />
+                    <Dropdown
+                      data={cpus}
+                      label="CPU"
+                      fieldName="laptop_cpu"
+                      error={touched.laptop_cpu && errors.laptop_cpu}
+                      className="firstDropDown"
+                    />
                   )}
                   <InputField
                     type="number"
                     name="laptop_cpu_cores"
                     label="CPU-ს ბირთვი"
                     placeholder="14"
+                    error={touched.laptop_cpu_cores && errors.laptop_cpu_cores}
                   />
                   <InputField
                     type="number"
                     name="laptop_cpu_threads"
                     label="CPU-ს ნაკადი"
                     placeholder="365"
+                    error={
+                      touched.laptop_cpu_threads && errors.laptop_cpu_threads
+                    }
                   />
                 </div>
                 <div className="rams">
@@ -152,6 +222,7 @@ const LaptopForm = () => {
                     placeholder="16"
                     name="laptop_ram"
                     className="ram"
+                    error={touched.laptop_ram && errors.laptop_ram}
                   />
                   <div className="memory">
                     <RadioInput
@@ -161,6 +232,10 @@ const LaptopForm = () => {
                       value2="HDD"
                       label1="SSD"
                       label2="HDD"
+                      error={
+                        touched.laptop_hard_drive_type &&
+                        errors.laptop_hard_drive_type
+                      }
                     />
                   </div>
                 </div>
@@ -178,6 +253,7 @@ const LaptopForm = () => {
                     label="ლეპტოპის ფასი"
                     name="laptop_price"
                     className="ram"
+                    error={touched.laptop_price && errors.laptop_price}
                   />
                 </div>
                 <div className="laptopState">
@@ -188,11 +264,12 @@ const LaptopForm = () => {
                     value2="used"
                     label1="ახალი"
                     label2="მეორადი"
+                    error={touched.laptop_state && errors.laptop_state}
                   />
                 </div>
                 <div className="buttons">
                   <button className="goBack" type="button">
-                    უკან
+                    <Link to="/info/employee">უკან</Link>
                   </button>
                   <button className="submitBtn" type="submit">
                     დამახსოვრება
@@ -211,26 +288,3 @@ const LaptopForm = () => {
 };
 
 export default LaptopForm;
-
-{
-  /* <Field name="laptop_image">
-                {(val) => {
-                  console.log({ val });
-                  return (
-                    <>
-                      <div className="mobileView">
-                        <img src={camera} alt="camera" />
-                      </div>
-                      <p className="mobileView">ლეპტოპის ფოტოს ატვირთვა</p>
-                      <p className="desktopView">
-                        ჩააგდე ან ატვირთე ლეპტოპის ფოტო
-                      </p>
-                      <button type="button" className="desktopView">
-                        ატვირთე
-                        <input type="file" className="desktopView" />
-                      </button>
-                    </>
-                  );
-                }}
-              </Field> */
-}

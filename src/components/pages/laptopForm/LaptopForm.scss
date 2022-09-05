@@ -1,9 +1,44 @@
+label {
+  cursor: pointer;
+}
 .laptopFormPage {
   margin: auto;
   width: 1226px;
   border-radius: 18px;
   background-color: white;
-
+  .uploadedImage {
+    height: 423px;
+    width: 878px;
+    margin-left: 174px;
+    margin-top: 68px;
+    border-radius: 18px;
+  }
+  .hide {
+    display: none;
+  }
+  #imageError {
+    background-color: rgba(255, 241, 241, 1);
+    border: 2px dashed rgba(229, 47, 47, 1);
+    p {
+      color: rgba(229, 47, 47, 1);
+      img {
+        display: block;
+        margin: auto;
+        margin-bottom: 19px;
+        height: 34px;
+        width: 38px;
+      }
+    }
+    .desktopView {
+      color: white;
+    }
+    label {
+      color: rgba(229, 47, 47, 1);
+      img {
+        padding-top: 12px;
+      }
+    }
+  }
   .imageInput {
     border: 2px dashed rgba(67, 134, 169, 1);
     height: 423px;
@@ -14,7 +49,7 @@
     .mobileView {
       display: none;
     }
-    p {
+    .p {
       margin: auto;
       text-align: center;
       color: rgba(67, 134, 169, 1);
@@ -22,16 +57,45 @@
       margin-top: 107px;
       font-size: 20px;
     }
-    button {
+    .desktopView {
+      input {
+        display: none;
+      }
+      text-align: center;
+      padding-top: 15px;
       color: white;
       background-color: rgba(98, 161, 235, 1);
       border: none;
-      height: 60px;
+      height: 45px;
       width: 233px;
       border-radius: 8px;
       display: block;
       margin: auto;
       margin-top: 65px;
+      font-size: 20px;
+    }
+  }
+
+  .uploaded {
+    display: flex;
+    justify-content: space-between;
+    width: 878px;
+    margin: auto;
+    margin-top: 30px;
+    img {
+      height: 22px;
+      margin-right: 30px;
+    }
+    label {
+      text-align: center;
+      padding-top: 15px;
+      color: white;
+      background-color: rgba(98, 161, 235, 1);
+      border: none;
+      height: 45px;
+      width: 233px;
+      border-radius: 8px;
+      display: block;
       font-size: 20px;
     }
   }
@@ -43,7 +107,10 @@
     width: 878px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    div:nth-of-type(2) {
+      margin-top: 15px;
+    }
     div {
       width: 408px;
       display: flex;
@@ -53,7 +120,6 @@
         font-weight: 700;
         height: 35px;
       }
-
       input,
       select {
         padding-left: 16px;
@@ -66,10 +132,11 @@
       select {
         border: none;
         background-color: rgba(235, 235, 235, 1);
+        margin-top: 20px;
       }
       input {
         border: 1px solid rgba(100, 153, 255, 1);
-        margin-bottom: 35px;
+        margin-bottom: 10px;
       }
     }
   }
@@ -79,7 +146,10 @@
     display: flex;
     width: 878px;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    .firstDropDown {
+      margin-top: 35px;
+    }
     div {
       display: flex;
       flex-direction: column;
@@ -104,7 +174,7 @@
       }
       input {
         border: 1px solid rgba(100, 153, 255, 1);
-        margin-bottom: 35px;
+        // margin-bottom: 35px;
       }
     }
   }
@@ -180,8 +250,10 @@
       font-size: 18px;
       border: none;
       background-color: white;
-      color: rgba(98, 161, 235, 1);
       font-weight: 600;
+      a {
+        color: rgba(98, 161, 235, 1);
+      }
     }
     .submitBtn {
       height: 60px;
@@ -223,9 +295,11 @@
       left: 16px;
       top: 29px;
       border-radius: 8px;
-      .desktopView {
+      .desktopView,
+      .p {
         display: none;
       }
+
       .mobileView {
         display: block;
         img {
@@ -234,13 +308,34 @@
           margin: auto;
         }
       }
-      p {
+      label {
         color: rgba(67, 134, 169, 1);
         height: 52px;
         margin-top: 30px;
         width: 176px;
         text-align: center;
         margin: auto;
+      }
+    }
+    .uploadedImage {
+      height: 181px;
+      width: 358px;
+      margin-left: 16px;
+      margin-top: 30px;
+      border-radius: 8px;
+    }
+    .uploaded {
+      width: 358px;
+      label {
+        height: 46px;
+        width: 187px;
+        font-size: 18px;
+        font-weight: 500;
+      }
+      div {
+        font-family: Helvetica Neue;
+        font-size: 14px;
+        font-weight: 600;
       }
     }
     .fields {
@@ -252,6 +347,7 @@
       width: 390px;
       top: 326px;
       padding-bottom: 33px;
+
       div {
         margin: auto;
         width: 358px;
@@ -268,10 +364,16 @@
       align-items: center;
       top: 670px;
       width: 390px;
+      .firstDropDown {
+        margin: 0;
+      }
       div {
         display: flex;
         flex-direction: column;
         width: 358px;
+        input {
+          margin-bottom: 0;
+        }
       }
     }
     .rams {

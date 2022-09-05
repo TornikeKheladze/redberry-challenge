@@ -1,5 +1,5 @@
 import { Field, ErrorMessage } from "formik";
-const Email = () => {
+const Email = ({ error }) => {
   const validateEmail = (email) => {
     let error;
     if (!email) {
@@ -10,7 +10,7 @@ const Email = () => {
     return error;
   };
   return (
-    <div className="email">
+    <div className="email" id={error && "ERROR"}>
       <div>
         <label htmlFor="email">მეილი</label>
         <Field

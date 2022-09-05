@@ -1,17 +1,20 @@
-import { Formik, Form } from "formik";
+import "./EmployeeForm.scss";
+import logo from "../../../assets/logo.png";
+
 import * as Yup from "yup";
+import { Formik, Form } from "formik";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import "./EmployeeForm.scss";
-import Header from "../../Header";
-import logo from "../../../assets/logo.png";
 import { fetchPositions, fetchTeams } from "../../../features/laptopsSlice";
+
+import Header from "../../Header";
 import Email from "./Email";
 import Tel from "./Tel";
 import InputField from "./InputField";
 import Dropdown from "../laptopForm/Dropdown";
+
 const EmployeeForm = () => {
   const teams = useSelector((store) => store.generals.teams);
   const positions = useSelector((store) => store.generals.positions);
@@ -48,6 +51,7 @@ const EmployeeForm = () => {
     name: Yup.string().min(2, "მინიმუმ 2 სიმბოლო").required("სავალდებულო"),
     surname: Yup.string().min(2, "მინიმუმ 2 სიმბოლო").required("სავალდებულო"),
     position_id: Yup.string().required("სავალდებულო"),
+    team_id: Yup.string().required("სავალდებულო"),
     phone_number: Yup.string().required("სავალდებულო"),
   });
 
@@ -113,7 +117,7 @@ const EmployeeForm = () => {
                     className="team dropdown"
                     label="თიმი"
                     fieldName="team_id"
-                    error={touched.team_id && errors.name}
+                    error={touched.team_id && errors.team_id}
                   />
                 )}
 
@@ -123,7 +127,7 @@ const EmployeeForm = () => {
                     className="position dropdown"
                     label="პოზიცია"
                     fieldName="position_id"
-                    error={touched.position_id && errors.name}
+                    error={touched.position_id && errors.position_id}
                   />
                 )}
                 <Email error={touched.email && errors.email} />

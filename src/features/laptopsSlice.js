@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit/";
+
 import laptops from "../apis/laptops";
 
 export const fetchTeams = createAsyncThunk("laptop/fetchTeams", async () => {

@@ -1,11 +1,13 @@
 import "./LaptopList.scss";
-import { useEffect } from "react";
 import { fetchLaptops } from "../../../features/laptopsSlice";
+
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import leftArrow from "../../../assets/left-button.png";
 import Laptop from "./Laptop";
+
 const LaptopList = () => {
   const dispatch = useDispatch();
   useEffect(() => {

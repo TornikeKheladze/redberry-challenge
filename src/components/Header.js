@@ -1,5 +1,6 @@
-import leftButton from "../assets/left-button.png";
 import { Link } from "react-router-dom";
+
+import leftButton from "../assets/left-button.png";
 import "./Header.scss";
 
 const Header = ({ active, to }) => {

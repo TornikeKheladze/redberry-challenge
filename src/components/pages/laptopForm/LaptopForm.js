@@ -1,26 +1,27 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import * as Yup from "yup";
-
 import "./LaptopForm.scss";
-import {
-  createLaptop,
-  fetchBrands,
-  fetchCpus,
-} from "../../../features/laptopsSlice";
 
 import checked from "../../../assets/done.png";
 import logo from "../../../assets/logo.png";
 import camera from "../../../assets/camera.png";
 import errorImg from "../../../assets/error.png";
 
+import { Link } from "react-router-dom";
+import { Formik, Form, Field } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import * as Yup from "yup";
+
+import {
+  createLaptop,
+  fetchBrands,
+  fetchCpus,
+} from "../../../features/laptopsSlice";
+
 import InputField from "../employeeForm/InputField";
 import Header from "../../Header";
 import Dropdown from "./Dropdown";
 import RadioInput from "./RadioInput";
 import Popup from "./Popup";
-import { Link } from "react-router-dom";
 
 const LaptopForm = () => {
   const dispatch = useDispatch();
@@ -64,7 +65,7 @@ const LaptopForm = () => {
 
   const data = JSON.parse(localStorage.getItem("laptopForm"));
   if (data) initialValues = data;
-  console.log();
+
   const onSubmit = (values) => {
     const allValues = {
       ...JSON.parse(localStorage.getItem("employeeForm")),
